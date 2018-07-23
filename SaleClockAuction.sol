@@ -60,18 +60,18 @@ contract SaleClockAuction is ClockAuction {
         uint256 price = _bid(_tokenId, msg.value);
         _transfer(msg.sender, _tokenId);
 
-        // If not a gen0 auction, exit
+        // If not a car0 auction, exit
         if (seller == address(nonFungibleContract)) {
-            // Track gen0 sale prices
-            lastGen0SalePrices[gen0SaleCount % 5] = price;
-            gen0SaleCount++;
+            // Track car0 sale prices
+            lastCar0SalePrices[car0SaleCount % 5] = price;
+            car0SaleCount++;
         }
     }
 
-    function averageGen0SalePrice() external view returns (uint256) {
+    function averageCar0SalePrice() external view returns (uint256) {
         uint256 sum = 0;
         for (uint256 i = 0; i < 5; i++) {
-            sum += lastGen0SalePrices[i];
+            sum += lastCar0SalePrices[i];
         }
         return sum / 5;
     }
